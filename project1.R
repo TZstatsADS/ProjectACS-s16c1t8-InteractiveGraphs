@@ -19,30 +19,30 @@ popdata<-merge(popdata,INDP.name,by.x = "INDP", by.y = "num")
 popdata<-merge(popdata,COW.name,by.x = "COW", by.y = "num")
 popdata = mutate(popdata,STname=ST.name[ST,2],
                  STabbr = ST.name[ST,3],
-                 Reigion = ST.name[ST,4])
+                 Region = ST.name[ST,4])
 
 #analyze cow
 data<-popdata%>%
-      filter(Reigion %in% c(1,2))%>%
-      group_by(Reigion)
+      filter(Region %in% c(1,2))%>%
+      group_by(Region)
 
-pop<-table(data$Reigion)
+pop<-table(data$Region)
 
-cowcount<-xtabs(~COW+Reigion,data)%>%
+cowcount<-xtabs(~COW+Region,data)%>%
   prop.table(margin = 2)*100
 
-cowcount<-ddply(data,.(data$Reigion,data$COWname),nrow)
-names(cowcount)<-c("Reigion","Cow","Freq")
-cowcount$Freq<-cowcount$Freq/pop[cowcount$Reigion]*100
+cowcount<-ddply(data,.(data$Region,data$COWname),nrow)
+names(cowcount)<-c("Region","Cow","Freq")
+cowcount$Freq<-cowcount$Freq/pop[cowcount$Region]*100
 cowcount<-cowcount[with(cowcount,order(-Freq)),]
-ggplot(cowcount, aes(x = factor(Cow), y = Freq,fill = factor(Reigion),color=factor(Reigion))) +   
+ggplot(cowcount, aes(x = Cow, y = Freq,fill = factor(Region),color=factor(Region))) +   
   geom_bar(position = "dodge", stat="identity")+
   ylab("Percentage") + 
   xlab("Class of Workers") + ggtitle("Comparing class of workers bwteen the westcoast and eastcoast") +
+  
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 
 
 levels(data$COW) <- c("Private for-profit", "Private non-profit", "Local government",
                       "State government", "Federal government", "Self-employed without corporation",
                       "Self-employed incorpoarated", "Working without pay(family business/farm)", "Unemployed")
-cowvar<-factor(counts$COW,)
