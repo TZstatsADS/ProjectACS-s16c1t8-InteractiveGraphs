@@ -47,6 +47,11 @@ ggplot(data, aes(center, height)) +
   scale_x_continuous(breaks = seq(0, 1, 1/12), 
           labels=c("0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24"))
 
+#Time of arrival
+ggplot(Work, aes(JWAP, group = Region)) + 
+  geom_bar(binwidth = 10, aes(colour = Region, fill = Region), alpha = 0.7) +
+  xlab("Time") + ylab("Count") + ggtitle("Time of arrival")
+
 #Time of departure
 data <- as.data.frame(prop.table(table(Work$JWDP, Work$Region)))
 data$margin <- prop.table(table(Work$JWDP))
@@ -57,6 +62,11 @@ ggplot(data, aes(center, height)) +
   labs(x = "Time", y = "Frequency", title = "Time of departure") +
   scale_x_continuous(breaks = seq(0, 1, 1/12), 
          labels=c("0", "2", "4", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24"))
+
+#Time of departure
+ggplot(Work, aes(JWDP, group = Region)) + 
+  geom_bar(binwidth = 10, aes(colour = Region, fill = Region), alpha = 0.7) +
+  xlab("Time") + ylab("Count") + ggtitle("Time of departure")
 
 #Travel time to work
 RegionNames <- c("Northeast", "Middle", "South", "West")
@@ -80,6 +90,20 @@ ggplot(data, aes(center, height)) +
   labs(x = "Time", y = "Frequency", title = "Travel time to work") +
   scale_x_continuous(breaks = seq(0, 1, 1/8), 
               labels=c("0", "3", "6", "9", "12", "15", "18", "21", "24"))
+
+#Transportation
+data <- select(Work, JWTR, Region) %>%
+        filter(JWTR != 1)
+ggplot(data, aes(JWTR, group = Region)) + 
+  geom_bar(aes(colour = Region, fill = Region), alpha = 0.7) +
+  xlab("Transportation") + ylab("Count") + ggtitle("Means of transportation")
+
+
+data2 <- select(Work, ST, JWTR) %>%
+        filter(ST %in% c(6, 36))
+ggplot(data2, aes(JWTR, group = ST)) + 
+  geom_bar(aes(colour = Region, fill = Region), alpha = 0.7) +
+  xlab("Transportation") + ylab("Count") + ggtitle("Means of transportation")
 
 
 
