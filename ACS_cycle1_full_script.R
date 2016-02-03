@@ -1,8 +1,15 @@
-setwd("/Users/MengyingLiu/Documents/STAT4249")
+
 library("data.table")
 library("dplyr")
 library("plyr")
 library("ggplot2")
+library("tidyr")
+library("circlize")
+library("plotly")
+library("readr")
+library("gsub")
+library("choroplethr")
+
 
 #migration&industry
 colkeep<-c("ST","INDP","COW","OCCP","POBP","POWSP")
@@ -38,8 +45,7 @@ movecount<-xtabs(~BirthRegion+ WorkRegion,popdata);movecount
 
 movecount<-as.matrix.data.frame(movecount)
 
-#the cord diagram of people flow 
-library("dplyr")
+#the cord diagram of people flow
 #flow matrix
 df1<-structure(list(order = rep(1:5),
                     rgb =c("210,150,12","125,175,0","255,219,0","100,146,125","73,255,233"),
@@ -50,11 +56,11 @@ m <- as.matrix.data.frame(movecount)
 dimnames(m) <- list(orig = df1$region, work = df1$region)
 m[m<=quantile(m,0.01)]<-0
 #sort regions and create colours
-library("tidyr")
+
 df1 <- df1 %>% separate(rgb, c("r","g","b")) %>% mutate(col = rgb(r, g, b, max=255), 
                                                         max = rowSums(m)+colSums(m))
 #plot using chordDiagram
-library("circlize")
+
 circos.clear()
 par(mar = rep(0, 4), cex=0.9)
 circos.par(start.degree = 90, gap.degree = 3)
@@ -122,17 +128,13 @@ b<-list(title = "Freq")
 
 
 dev.new(width=5, height=4)
-library(plotly)
+
 plot_ly(indpresult, x = factor(Indpname),y = Freq, size = Freq,mode = "markers",
         text = paste("Industry: ", Indpname),color = factor(Regionname)) %>%
   layout(xaxis = a, yaxis = b, showlegend = TRUE)
 
 
 rm(list=ls())
-install.packages('readr')
-library(readr)
-install.packages('gsub')
-library(gsub)
 
 a<-read.csv('pusa1.csv')
 all<-a
@@ -152,11 +154,6 @@ print
 
 #Income analysis
 
-library("data.table")
-library("dplyr")
-library("plyr")
-library("ggplot2")
-library('plotly')
 
 colkeep<-c('ST','MIGSP','AGEP')
 dataa<- fread("pusa.csv", select=colkeep )  
@@ -324,11 +321,7 @@ plot_ly(d_ca, x = AGEP, y = WKHP, text = paste("INCOME ", WAGP),
 
 #Income analysis
 
-library("data.table")
-library("dplyr")
-library("plyr")
-library("ggplot2")
-library(plotly)
+
 
 colkeep<-c('ST','ADJINC',"OIP","SEMP",'WAGP','PINCP','PAP','RETP','SEX','AGEP','INDP','SSIP')
 dataa<- fread("pusa.csv", select=colkeep )
@@ -443,11 +436,7 @@ plot_ly(df, z = WAGP, text = hover, locations = code, type = 'choropleth',
 
 #Income analysis
 
-library("data.table")
-library("dplyr")
-library("plyr")
-library("ggplot2")
-library('plotly')
+
 
 colkeep<-c('ST','ADJINC','WAGP','WKHP','AGEP')
 dataa<- fread("pusa.csv", select=colkeep )
@@ -552,8 +541,6 @@ plot_ly(d_ca, x = AGEP, y = WKHP, text = paste("INCOME ", WAGP),
 
 
 #work
-library("dplyr")
-library("ggplot2")
 
 #colsToKeep = c("ST", "JWMNP", "JWTR", "WKHP", "WKW", "JWAP", "JWDP", "PWGTP")
 #pusa <- fread("D:/CU/4249_Data/Project_1/ss13pusa.csv", select = colsToKeep)
@@ -598,12 +585,10 @@ ggplot(Transport2, aes(JWTR, group = ST)) +
 
 
 #marriage
-setwd("C:/Original/good stat/2016 spring/Applied data science/project 1")
-getwd()
-library("dplyr")
-library("data.table")
-library("ggplot2")
-library("choroplethr")
+#setwd("C:/Original/good stat/2016 spring/Applied data science/project 1")
+#getwd()
+
+
 
 reRead <- 1
 ##read data and save it as RData to save time nect time:
