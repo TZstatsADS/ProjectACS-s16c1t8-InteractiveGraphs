@@ -17,3 +17,10 @@ proj/
 Please see each subfolder for a README file.
 
 Project link: <a href="http://4249cycle1.netai.net/">http://4249cycle1.netai.net/<a>
+
+
+Group 8:
+Li,Jingwei(jl4549)
+Li,Weihan(wl2525)
+Liao,Aoyuan(al3468)
+Liu,Mengying(ml3810)
