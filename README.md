@@ -18,9 +18,10 @@ Please see each subfolder for a README file.
 
 Project link: <a href="http://4249cycle1.netai.net/">http://4249cycle1.netai.net/<a>
 
+Project American Community Survey
 
-Group 8:
-Li,Jingwei(jl4549)
-Li,Weihan(wl2525)
-Liao,Aoyuan(al3468)
-Liu,Mengying(ml3810)
+Team members:  Jingwei Li(jl4549), Weihan Li(wl2525), Aoyuan Liao(al3468), Mengying Liu(ml3810)
+
+Summary: In this project, we analysed the diverse lifestyles of people living in different regions of America based on the data from American Community Survery in 2013. We put a emphasis on the difference between New Yorkers and Californians.
+
+[Contribution Statement]  Weihan Li carried out the data visulization for income levels and developed the website where we present our results. Aoyuan Liao implemented the data analysis of marital propensity and family status including raising children and single-parent family. Mengying Liu designed the interactive graphs for population shift by D3. Jingwei Li explored the difference in commute transportation, industies and careers. All team members contributed to the GitHub repository and prepared the presentation. All team members approve our work presented in our GitHub repository including this contribution statement.
